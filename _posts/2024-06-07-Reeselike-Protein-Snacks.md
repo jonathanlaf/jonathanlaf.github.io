@@ -5,8 +5,20 @@ categories: [Health, Recipe]
 tags: [proteins, healty snacks]     # TAG names should always be lowercase
 ---
 
-With only 75 calories & 5.8g of proteins per bar, you'll enjoy two of thems for a quick snacks on the go or when you crave your sugar so badly ! 
+With only 75 calories and 5.8g of protein per bar, you can enjoy two of them for a quick snack on the go or when you're badly craving sugar!
 
+## Ingredients
+|-------|--------|--------|
+| ISO Gold Isolated Whey Protein - Vanilla (PVL Elite) | 3 scoops | 360 calories |
+| Nutri-Nut Powdered Peanut Butter (BioX) | 120g | 500 calories |
+| Organic Virgin Coconut Oil (Kirkland Signature) | 30g | 243 calories |
+| Liquid Honey (Selection) | 30g | 90 calories |
+| Chipits Chunks 70% Cacao (Hershey's) | 130g | 607 calories |
+
+## Preparations
+Melt your coconut oil, then mix all ingredients together except for the chocolate. Once everything is homogeneous, form little balls weighing 14.5g each and press them into your bar mold (I use ["Perfect Petites"](https://epicure.com/en-ca/product/1004231)). This should yield 24 little bars. After portioning them, melt your chocolate either in the microwave or using a bain-marie. Then pour equal parts of chocolate over each bar, I used approximatively a teaspoon for each. Freeze for an hour, and voilà! You have wonderful Reese-like protein bars!
+
+## Nutritional facts
 |-------|--------|
 | Calories | 75 |
 | Total Fat | 4.1g |
@@ -30,15 +42,5 @@ With only 75 calories & 5.8g of proteins per bar, you'll enjoy two of thems for 
 | Vitamin A | 0% |
 | Vitamn C | 0% |
 
-* Percent Daily Values are based on a 2 000 calories diet. Your daily values may be higher or lower depending on your calorie needs.
-* Theses values can change if you're not using the same brand of ingredients when stated. I would recommand enterring your recipe in your calorie calculator and make sure it doesn't change too much.
-
-|-------|--------|--------|
-| ISO Gold Isolated Whey Protein - Vanilla (PVL Elite) | 3 scoops | 360 calories |
-| Nutri-Nut Powdered Peanut Butter (BioX) | 120g | 500 calories |
-| Organic Virgin Coconut Oil (Kirkland Signature) | 30g | 243 calories |
-| Liquid Honey (Selection) | 30g | 90 calories |
-| Chipits Chunks 70% Cacao (Hershey's) | 130g | 607 calories |
-
-Melt your coconut oil, then mix all ingredient together except for the chocolate. When all homogenious form little ball of 14.5g then press them in your bar mold (I use ["Perfect Petites"](https://epicure.com/en-ca/product/1004231)). It should give you 24 little bar, when you're done portionning them, melt your chocolate in the microwave or using a bain marie, then poor equal part on each bar, I use a teaspoon of chocolate on each bar. Then freeze for an hour, and voilà! You have wonderful reese-like proteins bar! 
-
+> * Percent Daily Values are based on a 2 000 calories diet. Your daily values may be higher or lower depending on your calorie needs.
+> * These values can change if you're not using the same brand of ingredients as stated. I would recommend entering your recipe into your calorie calculator to ensure it doesn't vary too much.
