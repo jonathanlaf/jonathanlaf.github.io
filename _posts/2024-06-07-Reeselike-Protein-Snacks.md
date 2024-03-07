@@ -8,6 +8,7 @@ tags: [proteins, healty snacks]     # TAG names should always be lowercase
 With only 75 calories and 5.8g of protein per bar, you can enjoy two of them for a quick snack on the go or when you're badly craving sugar!
 
 ## Ingredients
+
 |-------|--------|--------|
 | ISO Gold Isolated Whey Protein - Vanilla (PVL Elite) | 3 scoops | 360 calories |
 | Nutri-Nut Powdered Peanut Butter (BioX) | 120g | 500 calories |
@@ -16,9 +17,11 @@ With only 75 calories and 5.8g of protein per bar, you can enjoy two of them for
 | Chipits Chunks 70% Cacao (Hershey's) | 130g | 607 calories |
 
 ## Preparations
+
 Melt your coconut oil, then mix all ingredients together except for the chocolate. Once everything is homogeneous, form little balls weighing 14.5g each and press them into your bar mold (I use ["Perfect Petites"](https://epicure.com/en-ca/product/1004231)). This should yield 24 little bars. After portioning them, melt your chocolate either in the microwave or using a bain-marie. Then pour equal parts of chocolate over each bar, I used approximatively a teaspoon for each. Freeze for an hour, and voilà! You have wonderful Reese-like protein bars!
 
 ## Nutritional facts
+
 |-------|--------|
 | Calories | 75 |
 | Total Fat | 4.1g |
