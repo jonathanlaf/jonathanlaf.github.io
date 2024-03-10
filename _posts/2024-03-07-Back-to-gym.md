@@ -3,6 +3,8 @@ title: Back to gym
 date: 2024-03-07 17:15:00
 categories: [Health, Story]
 tags: [health] # TAG names should always be lowercase
+image:
+  path: /assets/img/2024/03/back-to-gym/banner.webp
 ---
 
 A few weeks ago, I decided to take control of my health. I now train at least four times a week, each session lasting between one to one and a half hours. This regimen not only aids in getting my body back in shape but also significantly improves my mental state. I am keen to share the progress I make and the discoveries I encounter along this journey. Previously, I had trained consistently for almost a year before the pandemic disrupted my routine. During that period, I lost weight, built muscle, and was in the best shape of my life. I am determined to reclaim that level of health. I want to look in the mirror and feel pride in my accomplishments rather than despair at my current trajectory towards my grave.

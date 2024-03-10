@@ -1,8 +1,10 @@
 ---
-title: Reeselike Protein Snacks
+title: Reese-like Protein Snacks
 date: 2024-03-07 17:30:00
 categories: [Health, Recipe]
 tags: [proteins, healty snacks]     # TAG names should always be lowercase
+image:
+  path: /assets/img/2024/03/reese-like-protein-snack/banner-2.webp
 ---
 
 With only 75 calories and 5.8g of protein per bar, you can enjoy two of them for a quick snack on the go or when you're badly craving sugar!
