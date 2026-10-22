@@ -22,3 +22,18 @@ Open http://localhost:8766/. The site also works without JavaScript in French, u
 ## Domain
 
 The existing root domain currently redirects to GitHub. Replacing that redirect is a separate hosting/DNS step; keep all existing subdomain records intact.
+
+## Contribution calendar
+
+Run python scripts/update_contributions.py to refresh assets/contributions.json
+from the contribution calendar on the public GitHub profile. Only dates,
+public counts and intensity levels are saved; no repository names or private
+activity details are collected. No credentials or API key are used.
+
+The GitHub Actions workflow refreshes the snapshot daily after this repository
+is published. Until then it is a dated snapshot; run the script locally to refresh.
+Refresh commits belong to the Actions bot, not the profile owner.
+
+KeyAura's logo is copied from jonathanlaf/keyaura/src-tauri/icons/icon.png.
+The firmware entry describes adaptations of the upstream CAD Mouse MK2 project,
+not authorship of the original hardware design.

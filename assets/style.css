@@ -25,7 +25,7 @@ svg { width:1.4rem;height:1.4rem;flex-shrink:0; }
 .navigation button:hover { background:var(--sage); }
 .nav-divider { height:1.3rem;border-left:1px solid var(--line);margin-inline:.5rem; }
 .language-toggle { font-weight:700; }
-.intro { display:grid;grid-template-columns:1.25fr 1fr;align-items:end;gap:3rem;padding-block:4.4rem 5rem;border-top:1px solid var(--line); }
+.intro { display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:3rem;padding-block:4.4rem 5rem;border-top:1px solid var(--line); }
 .eyebrow { display:flex;align-items:center;gap:.7rem;margin:0 0 1rem;font-size:.66rem;font-weight:750;letter-spacing:.13em;color:var(--muted); }
 .small-line { width:1.7rem;height:2px;background:var(--accent); }
 h1,h2,h3,p { margin-top:0; }
@@ -101,3 +101,43 @@ h3 a:hover { text-decoration:underline; }
  *,*::before,*::after { transition:none!important; }
  .project-card:hover,.project-card:hover .project-image img,.profile-link:hover .link-arrow { transform:none; }
 }
+
+.profile-photo { display:block; width:7rem; height:7rem; object-fit:cover; border-radius:1.25rem; margin-bottom:1.25rem; border:3px solid var(--sage); box-shadow:0 .5rem 1.3rem var(--shadow); }
+
+/* A visible professional profile, without an availability or job-search message. */
+.navigation .nav-linkedin { background:var(--sage);font-weight:700;gap:.4rem; }
+.linkedin-primary { display:flex;align-items:center;justify-content:space-between;gap:.8rem;min-height:52px;max-width:100%;padding:.65rem 1rem;margin:1.1rem 0 .5rem;background:var(--accent);color:var(--bg);border-radius:.65rem;text-decoration:none;font-weight:700;font-size:.9rem; }
+.linkedin-primary:hover { box-shadow:0 .35rem 1rem var(--shadow);text-decoration:underline; }
+.project-body .project-detail { font-size:.8rem;margin-top:-.6rem; }
+.keyaura-image { display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.2rem;background:radial-gradient(ellipse at center,#304236,#1b2522); }
+.keyaura-image img { width:38%;height:65%;object-fit:contain; }
+.keyaura-wordmark { font-size:1.7rem;font-weight:650;letter-spacing:-.04em;color:#f2f3ed; }
+.firmware-image { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;background:var(--sage);color:var(--accent); }
+.firmware-image svg { width:38%;height:55%; }
+.firmware-image span { font-size:1.35rem;font-weight:700;letter-spacing:-.03em;color:var(--fg); }
+.firmware-image small { font-size:.8rem;color:var(--muted); }
+.activity-section { border-top:1px solid var(--line);padding-block:3rem; }
+.activity-summary { color:var(--muted);font-size:.9rem; }
+.contribution-scroll { overflow-x:auto;padding:.5rem 0 1rem; }
+.contribution-chart { width:max-content;min-width:100%; }
+.contribution-grid,.contribution-months { display:grid;grid-auto-columns:12px;column-gap:4px; }
+.contribution-grid { grid-template-rows:repeat(7,12px);row-gap:4px; }
+.contribution-months { height:24px;font-size:.65rem;color:var(--muted); }
+.contribution-grid span,.contribution-legend i { display:block;width:12px;height:12px;border-radius:3px;background:var(--contribution-0); }
+:root { --contribution-0:#e0e4d6;--contribution-1:#cadbbd;--contribution-2:#9fbd8c;--contribution-3:#588565;--contribution-4:#146044; }
+@media(prefers-color-scheme:dark) { :root:not([data-theme="light"]) { --contribution-0:#2d352e;--contribution-1:#3e5943;--contribution-2:#537b5b;--contribution-3:#709d7d;--contribution-4:#9dc29b; } }
+:root[data-theme="dark"] { --contribution-0:#2d352e;--contribution-1:#3e5943;--contribution-2:#537b5b;--contribution-3:#709d7d;--contribution-4:#9dc29b; }
+[data-level="1"] { background:var(--contribution-1)!important; }
+[data-level="2"] { background:var(--contribution-2)!important; }
+[data-level="3"] { background:var(--contribution-3)!important; }
+[data-level="4"] { background:var(--contribution-4)!important; }
+.contribution-caption { display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;color:var(--muted);font-size:.7rem; }
+.contribution-legend { display:flex;gap:4px;align-items:center; }
+.contribution-legend span { margin-inline:.3rem; }
+.activity-details { font-size:.8rem;margin-top:1rem;color:var(--muted); }
+.activity-details summary { cursor:pointer;min-height:48px;display:list-item;padding-block:.5rem;text-decoration:underline; }
+.activity-details ul { display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.4rem 1.2rem;padding-left:1.2rem; }
+
+[hidden] { display:none!important; }
+
+.contribution-months span { white-space:nowrap; overflow-wrap:normal; }
