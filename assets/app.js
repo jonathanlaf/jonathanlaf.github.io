@@ -120,21 +120,39 @@
           row.appendChild(label);
         }
         var commits = document.createElement('span');
-        commits.textContent = count.format(repo.commits30days) + (english ? ' commits / 30 days' : ' commits / 30 jours');
-        var downloads = document.createElement('span');
-        downloads.textContent = repo.releases
-          ? count.format(repo.downloads) + (english ? ' release downloads · all time' : ' téléchargements des versions · total')
-          : (english ? 'No releases published' : 'Aucune version publiée');
-        row.append(commits, downloads);
+        var recent = count.format(repo.commits30days);
+        var total = count.format(repo.commitsAllTime);
+        var commitLabel = english ? 'Commits: ' + recent + ' in 30 days; ' + total + ' all time, on the default branch.'
+          : 'Commits : ' + recent + ' sur 30 jours ; ' + total + ' au total, sur la branche principale.';
+        var commitDescription = document.createElement('span');
+        commitDescription.className = 'visually-hidden';
+        commitDescription.textContent = commitLabel;
+        var icon = document.createElement('span');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = '🔀 ';
+        var value = document.createElement('span');
+        value.setAttribute('aria-hidden', 'true');
+        value.textContent = recent + (english ? ' (30d) / ' : ' (30 j) / ') + total + (english ? ' (all time)' : ' (total)');
+        commits.append(commitDescription, icon, value);
+        row.appendChild(commits);
+        if (repo.releases > 0) {
+          var separator = document.createElement('span');
+          separator.textContent = '|';
+          separator.setAttribute('aria-hidden', 'true');
+          var downloads = document.createElement('span');
+          var downloadDescription = document.createElement('span');
+          downloadDescription.className = 'visually-hidden';
+          downloadDescription.textContent = count.format(repo.downloads) + (english ? ' release asset downloads, all time.' : ' téléchargements des fichiers de versions, au total.');
+          var downloadValue = document.createElement('span');
+          downloadValue.setAttribute('aria-hidden', 'true');
+          downloadValue.textContent = '📥 ' + count.format(repo.downloads);
+          downloads.append(downloadDescription, downloadValue);
+          row.append(separator, downloads);
+        }
         slot.appendChild(row);
       });
     });
-    var updated = new Date(data.updated).toLocaleDateString(english ? 'en-CA' : 'fr-CA', {dateStyle:'medium',timeZone:'UTC'});
-    document.querySelectorAll('.project-stats').forEach(function(slot) {
-      var note = document.createElement('small');
-      note.textContent = (english ? 'Updated ' : 'Mise à jour le ') + updated;
-      slot.appendChild(note);
-    });
+
   }
   fetch('assets/repositories.json', {cache:'no-cache'}).then(function (response) {
     if (!response.ok) throw new Error('Repository activity unavailable');

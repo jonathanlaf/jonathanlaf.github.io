@@ -43,9 +43,9 @@ not authorship of the original hardware design.
 
 Run python scripts/update_repositories.py to refresh assets/repositories.json.
 The default branches of the explicitly listed public repositories are counted
-over the previous 30 days. Release downloads sum uploaded release assets across
+over the previous 30 days and across their full history. Release downloads sum uploaded release assets across
 all published releases (including prereleases); GitHub source archive downloads
-are not included. A repository without releases is labelled accordingly.
+are not included. The download metric is omitted for repositories without releases.
 
 Both snapshots refresh in the same daily workflow after publication. Visitors
 only fetch local JSON; they never call the GitHub API. The repository updater

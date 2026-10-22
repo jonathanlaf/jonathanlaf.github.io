@@ -182,11 +182,6 @@ a,button,input,select,textarea,summary,[tabindex] { scroll-margin-block:8rem; }
 .portrait-frame .profile-photo { display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;margin:0;border:0;border-radius:1rem;box-shadow:none; }
 .portrait-frame figcaption { padding:.8rem .35rem .15rem;font-weight:650; }
 .portrait-frame figcaption span { display:block;font-size:.8rem;font-weight:400;color:var(--muted); }
-.stats-explanation { max-width:54rem;font-size:.8rem; }
-.project-stats { margin-bottom:1rem;padding:.65rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:var(--bg); }
-.project-body .repo-stat { display:flex;flex-wrap:wrap;gap:.15rem 1rem;margin:0 0 .3rem;font-size:.75rem;color:var(--fg); }
-.repo-stat strong { flex-basis:100%; }
-.project-stats small { font-size:.65rem;color:var(--muted); }
 .contact-actions { display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-bottom:1rem; }
 .message-section { display:grid;grid-template-columns:1fr 1fr;gap:3rem;border-top:1px solid var(--line);padding-block:3rem; }
 .contact-form { padding:1.4rem;background:linear-gradient(135deg,var(--sage-light),var(--sage));border:1px solid var(--line);border-radius:1rem;min-width:0; }
@@ -220,3 +215,11 @@ a,button,input,select,textarea,summary,[tabindex] { scroll-margin-block:8rem; }
  :is(.contribution-grid,.contribution-legend) [data-level="3"] { background:repeating-linear-gradient(45deg,CanvasText 0 2px,Canvas 2px 3px); }
  :is(.contribution-grid,.contribution-legend) [data-level="4"] { background:CanvasText; }
 }
+
+/* Secondary project activity, quietly integrated into each card footer. */
+.project-body { display:flex;flex-direction:column;flex:1; }
+.project-card { display:flex;flex-direction:column; }
+.project-stats { margin-top:auto;padding-top:.8rem;background:none;border:0; }
+.project-body .repo-stat { display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .45rem;margin:0;font-size:.7rem;color:var(--muted); }
+.repo-stat + .repo-stat { margin-top:.3rem; }
+.repo-stat strong { font-size:inherit;font-weight:500; }

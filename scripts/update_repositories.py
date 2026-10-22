@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse, parse_qs
 from urllib.error import HTTPError
 import json
 import os
@@ -32,6 +32,12 @@ def pages(path):
         url = match.group(1)
     raise ValueError("Pagination limit reached; preserve the previous snapshot")
 
+def count_all_commits(path, branch):
+    # One result per page makes the last page number the exact history count.
+    data, links = get(path + "/commits?" + urlencode({"sha": branch, "per_page": 1}))
+    last = re.search(r'<([^>]+)>; rel="last"', links)
+    return int(parse_qs(urlparse(last.group(1)).query)["page"][0]) if last else len(data)
+
 def main():
     now = datetime.now(timezone.utc).replace(microsecond=0)
     since = now - timedelta(days=30)
@@ -42,13 +48,15 @@ def main():
         query = urlencode({"sha": metadata["default_branch"], "since": since.isoformat(), "until": now.isoformat()})
         try:
             commits = sum(1 for _ in pages(path + "/commits?" + query))
+            all_commits = count_all_commits(path, metadata["default_branch"])
         except HTTPError as error:
             if error.code != 409:
                 raise
             commits = 0
+            all_commits = 0
         releases = [r for r in pages(path + "/releases") if not r.get("draft")]
         downloads = sum(asset["download_count"] for release in releases for asset in release.get("assets", []))
-        result["repositories"][name] = {"commits30days": commits, "downloads": downloads,
+        result["repositories"][name] = {"commits30days": commits, "commitsAllTime": all_commits, "downloads": downloads,
             "releases": len(releases), "branch": metadata["default_branch"]}
     # Only replace the snapshot after every public repository succeeded.
     destination = DESTINATION.with_suffix(".tmp")

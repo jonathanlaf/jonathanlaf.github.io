@@ -8,16 +8,16 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f1ebdf">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/style.css?v=20261022e">
+<link rel="stylesheet" href="assets/style.css?v=20261022f">
 <script>
 try {
   var theme = localStorage.getItem('jl-hub-theme');
   if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
 } catch (e) {}
 </script>
-<script src="assets/app.js?v=20261022e" defer></script>
-<script src="assets/accessibility.js?v=20261022e" defer></script>
-<script src="assets/contact.js?v=20261022e" defer></script>
+<script src="assets/app.js?v=20261022f" defer></script>
+<script src="assets/accessibility.js?v=20261022f" defer></script>
+<script src="assets/contact.js?v=20261022f" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main" data-en="Skip to content">Aller au contenu</a>
@@ -58,7 +58,6 @@ try {
       <div><p class="eyebrow" data-en="BUILT & SHARED">CRÉER & PARTAGER</p><h2 id="projects-title" data-en="A few things I’m building.">Quelques projets à découvrir.</h2></div>
       <a class="quiet-link" href="https://github.com/jonathanlaf?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-en="All repositories">Tous les dépôts</span><span aria-hidden="true">↗</span></a>
     </div>
-    <p class="stats-explanation muted" data-en="Recent activity: commits on the default branch over 30 days. Downloads: all-time GitHub release asset downloads.">Activité récente : commits sur la branche principale sur 30 jours. Téléchargements : total des fichiers de versions GitHub.</p>
     <div class="projects-grid">
       <article class="project-card keyaura-card">
         <a class="project-image-link" href="https://github.com/jonathanlaf/keyaura" aria-label="Découvrir KeyAura" data-en-label="Explore KeyAura" target="_blank" rel="noopener noreferrer">
@@ -68,10 +67,10 @@ try {
         <div class="project-body">
           <div class="project-meta"><span class="project-category" data-en="MACOS · KEYBOARDS · AI-ASSISTED DEVELOPMENT">MACOS · CLAVIERS · DÉVELOPPEMENT AVEC L’IA</span><span class="project-number" aria-hidden="true">01 /</span></div>
           <h3><a href="https://github.com/jonathanlaf/keyaura" target="_blank" rel="noopener noreferrer">KeyAura</a></h3>
-          <div class="project-stats" data-repositories="keyaura"></div>
           <p data-en="A macOS overlay that makes programmable keyboards easier to learn: active layers, keys and shortcuts stay visible while you work. Built with Claude and Codex.">Une application macOS pour apprivoiser les claviers programmables : couches actives, touches et raccourcis restent visibles pendant le travail. Développée avec Claude et Codex.</p>
           <p class="project-detail" data-en="Currently supports the ZSA Voyager via Oryx.">Compatible pour le moment avec le ZSA Voyager via Oryx.</p>
           <a class="project-visit" href="https://github.com/jonathanlaf/keyaura" target="_blank" rel="noopener noreferrer"><span data-en="Explore KeyAura on GitHub">Découvrir KeyAura sur GitHub</span><span aria-hidden="true">↗</span></a>
+          <footer class="project-stats" data-repositories="keyaura"></footer>
         </div>
       </article>
       <article class="project-card">
@@ -82,11 +81,11 @@ try {
         <div class="project-body">
           <div class="project-meta"><span class="project-category" data-en="HARDWARE · FIRMWARE · WORK IN PROGRESS">HARDWARE · FIRMWARE · EN DÉVELOPPEMENT</span><span class="project-number" aria-hidden="true">02 /</span></div>
           <h3><a href="https://github.com/jonathanlaf/cad-mouse-mk2/tree/main/firmware" target="_blank" rel="noopener noreferrer">CAD Mouse MK2</a></h3>
-          <div class="project-stats" data-repositories="cad-mouse-mk2 cad-mouse-mk2-companion-app"></div>
           <p data-en="Firmware adaptations and a companion app for a DIY six-axis CAD controller, based on the original CAD Mouse MK2 project. Both are works in progress, awaiting completion of my physical mouse build.">Des adaptations du firmware et une application compagnon pour un contrôleur de CAO à six axes, basé sur le projet original CAD Mouse MK2. Les deux sont en développement, en attendant que je termine la construction de ma souris.</p>
           <p class="project-detail" data-en="A YouTube video is coming soon.">Une vidéo YouTube arrive bientôt.</p>
           <a class="project-visit" href="https://github.com/jonathanlaf/cad-mouse-mk2/tree/main/firmware" target="_blank" rel="noopener noreferrer"><span data-en="Explore the firmware">Découvrir le firmware</span><span aria-hidden="true">↗</span></a>
           <a class="project-visit" href="https://github.com/jonathanlaf/cad-mouse-mk2-companion-app" target="_blank" rel="noopener noreferrer"><span data-en="Explore the companion app">Découvrir l’application compagnon</span><span aria-hidden="true">↗</span></a>
+          <footer class="project-stats" data-repositories="cad-mouse-mk2 cad-mouse-mk2-companion-app"></footer>
         </div>
       </article>
 
@@ -100,9 +99,9 @@ try {
         <div class="project-body">
           <div class="project-meta"><span class="project-category" data-en="TECH SUPPORT">SERVICES INFORMATIQUES</span><span class="project-number" aria-hidden="true">03 /</span></div>
           <h3><a href="https://services.jonathanlafleur.ca/" data-en="PC & Mac Services" target="_blank" rel="noopener noreferrer">Services PC et Mac</a></h3>
-          <div class="project-stats" data-repositories="services"></div>
           <p data-en="Troubleshooting, upgrades and friendly help. Remotely, at the workshop or at your home for setup.">Dépannage, améliorations et accompagnement. À distance, à l’atelier ou chez vous pour la configuration.</p>
           <a class="project-visit" href="https://services.jonathanlafleur.ca/" target="_blank" rel="noopener noreferrer"><span>services.jonathanlafleur.ca</span><span aria-hidden="true">↗</span></a>
+          <footer class="project-stats" data-repositories="services"></footer>
         </div>
       </article>
       <article class="project-card">
@@ -115,9 +114,9 @@ try {
         <div class="project-body">
           <div class="project-meta"><span class="project-category" data-en="LEARNING & KARATE">APPRENTISSAGE & KARATÉ</span><span class="project-number" aria-hidden="true">04 /</span></div>
           <h3><a href="https://kohai.jonathanlafleur.ca/" target="_blank" rel="noopener noreferrer">Kohai <span class="kanji" lang="ja">後輩</span></a></h3>
-          <div class="project-stats" data-repositories="kohai"></div>
           <p data-en="Personal study notes for Shotokan karate kata. A place to review, understand and keep learning.">Des fiches personnelles pour étudier les kata de karaté Shotokan. Un espace pour réviser, comprendre et continuer d’apprendre.</p>
           <a class="project-visit" href="https://kohai.jonathanlafleur.ca/" target="_blank" rel="noopener noreferrer"><span>kohai.jonathanlafleur.ca</span><span aria-hidden="true">↗</span></a>
+          <footer class="project-stats" data-repositories="kohai"></footer>
         </div>
       </article>
     </div>
