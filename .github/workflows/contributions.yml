@@ -1,4 +1,4 @@
-name: Refresh public contribution calendar
+name: Refresh public GitHub activity
 on:
   schedule:
     - cron: '23 8 * * *'
@@ -14,11 +14,14 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/update_contributions.py
+      - run: python scripts/update_repositories.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Save refreshed public counts
         run: |
-          if git diff --quiet -- assets/contributions.json; then exit 0; fi
+          if git diff --quiet -- assets/contributions.json assets/repositories.json; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/contributions.json
-          git commit -m "chore: refresh public contribution calendar"
+          git add assets/contributions.json assets/repositories.json
+          git commit -m "chore: refresh public GitHub activity"
           git push

@@ -3,6 +3,7 @@
   var root = document.documentElement;
   var contributionData = null;
   var calendarRendered = false;
+  var repositoryData = null;
   var languageButton = document.querySelector('.language-toggle');
   var themeButton = document.querySelector('.theme-toggle');
   var translated = document.querySelectorAll('[data-en]');
@@ -27,6 +28,8 @@
       : 'Les projets de Jonathan Lafleur : services informatiques, Kohai et liens vers GitHub et LinkedIn.';
     updateThemeButton();
     if (contributionData) renderContributions(contributionData);
+    if (repositoryData) renderRepositories(repositoryData);
+    document.dispatchEvent(new Event('languagechange'));
   }
   function isDark() { return root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
   function updateThemeButton() {
@@ -42,7 +45,6 @@
   function renderContributions(data) {
     var grid = document.querySelector('.contribution-grid');
     var months = document.querySelector('.contribution-months');
-    var totals = document.querySelector('[data-month-totals]');
     var english = root.lang === 'en';
     var locale = english ? 'en-CA' : 'fr-CA';
     var count = new Intl.NumberFormat(locale);
@@ -51,9 +53,8 @@
     grid.setAttribute('aria-label', summary);
     var updated = new Date(data.updated + 'T12:00:00Z').toLocaleDateString(locale, { dateStyle: 'medium', timeZone: 'UTC' });
     document.querySelector('[data-activity-updated]').textContent = (english ? 'Public profile · updated ' : 'Profil public · mise à jour le ') + updated;
-    grid.replaceChildren(); months.replaceChildren(); totals.replaceChildren();
+    grid.replaceChildren(); months.replaceChildren();
     var offset = new Date(data.days[0].date + 'T12:00:00Z').getUTCDay();
-    var monthly = {};
     data.days.forEach(function (day, index) {
       var date = new Date(day.date + 'T12:00:00Z');
       var column = Math.floor((index + offset) / 7) + 1;
@@ -61,8 +62,10 @@
       cell.dataset.level = day.level;
       cell.style.gridColumn = column;
       cell.style.gridRow = date.getUTCDay() + 1;
-      cell.setAttribute('aria-hidden', 'true');
+      cell.setAttribute('role', 'img');
+      cell.tabIndex = index === data.days.length - 1 ? 0 : -1;
       cell.title = date.toLocaleDateString(locale, { dateStyle: 'long', timeZone: 'UTC' }) + ': ' + count.format(day.count) + ' contributions';
+      cell.setAttribute('aria-label', cell.title);
       grid.appendChild(cell);
       if (date.getUTCDate() === 1) {
         var label = document.createElement('span');
@@ -70,18 +73,25 @@
         label.textContent = date.toLocaleDateString(locale, { month: 'short', timeZone: 'UTC' });
         months.appendChild(label);
       }
-      var key = day.date.slice(0, 7);
-      monthly[key] = (monthly[key] || 0) + day.count;
     });
     var scroller = document.querySelector('.contribution-scroll');
     if (!calendarRendered) scroller.scrollLeft = scroller.scrollWidth;
     calendarRendered = true;
-    Object.keys(monthly).forEach(function (month) {
-      var item = document.createElement('li');
-      item.textContent = new Date(month + '-15T12:00:00Z').toLocaleDateString(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }) + ': ' + count.format(monthly[month]);
-      totals.appendChild(item);
-    });
   }
+  document.querySelector('.contribution-grid').addEventListener('keydown', function(event) {
+    var cells = Array.from(this.children);
+    var index = cells.indexOf(document.activeElement);
+    if (index < 0) return;
+    var offsets = {ArrowLeft:-7,ArrowRight:7,ArrowUp:-1,ArrowDown:1};
+    var next = event.key === 'Home' ? 0 : event.key === 'End' ? cells.length - 1
+      : Object.prototype.hasOwnProperty.call(offsets, event.key) ? index + offsets[event.key] : null;
+    if (next === null) return;
+    event.preventDefault();
+    next = Math.max(0, Math.min(cells.length - 1, next));
+    cells[index].tabIndex = -1; cells[next].tabIndex = 0;
+    cells[next].focus({preventScroll:true});
+    cells[next].scrollIntoView({block:'nearest',inline:'nearest'});
+  });
   fetch('assets/contributions.json', { cache: 'no-cache' }).then(function (response) {
     if (!response.ok) throw new Error('Calendar unavailable');
     return response.json();
@@ -92,7 +102,46 @@
   }).catch(function () {
     document.querySelector('.contribution-scroll').hidden = true;
     document.querySelector('.contribution-caption').hidden = true;
-    document.querySelector('.activity-details').hidden = true;
   });
+
+  function renderRepositories(data) {
+    var english = root.lang === 'en';
+    var count = new Intl.NumberFormat(english ? 'en-CA' : 'fr-CA');
+    document.querySelectorAll('[data-repositories]').forEach(function (slot) {
+      slot.replaceChildren();
+      slot.dataset.repositories.split(' ').forEach(function (name) {
+        var repo = data.repositories[name];
+        if (!repo) return;
+        var row = document.createElement('p');
+        row.className = 'repo-stat';
+        if (slot.dataset.repositories.includes(' ')) {
+          var label = document.createElement('strong');
+          label.textContent = name === 'cad-mouse-mk2' ? 'Firmware' : (english ? 'Companion app' : 'Application compagnon');
+          row.appendChild(label);
+        }
+        var commits = document.createElement('span');
+        commits.textContent = count.format(repo.commits30days) + (english ? ' commits / 30 days' : ' commits / 30 jours');
+        var downloads = document.createElement('span');
+        downloads.textContent = repo.releases
+          ? count.format(repo.downloads) + (english ? ' release downloads · all time' : ' téléchargements des versions · total')
+          : (english ? 'No releases published' : 'Aucune version publiée');
+        row.append(commits, downloads);
+        slot.appendChild(row);
+      });
+    });
+    var updated = new Date(data.updated).toLocaleDateString(english ? 'en-CA' : 'fr-CA', {dateStyle:'medium',timeZone:'UTC'});
+    document.querySelectorAll('.project-stats').forEach(function(slot) {
+      var note = document.createElement('small');
+      note.textContent = (english ? 'Updated ' : 'Mise à jour le ') + updated;
+      slot.appendChild(note);
+    });
+  }
+  fetch('assets/repositories.json', {cache:'no-cache'}).then(function (response) {
+    if (!response.ok) throw new Error('Repository activity unavailable');
+    return response.json();
+  }).then(function(data) { repositoryData = data; renderRepositories(data); }).catch(function() {
+    document.querySelectorAll('.project-stats').forEach(function(slot) { slot.hidden = true; });
+  });
+
   language(read('jl-hub-lang') === 'en' ? 'en' : 'fr');
 })();
