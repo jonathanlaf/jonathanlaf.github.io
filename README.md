@@ -6,7 +6,7 @@ A small bilingual static home page for jonathanlafleur.ca. Plain HTML, CSS and J
 
 - `index.html`: profile links and project entries. French is the HTML default; `data-en` contains English text. Keep both versions in step.
 - `assets/style.css`: beige, sage and emerald palette; responsive light and dark themes.
-- `assets/app.js`: language and theme preferences, saved only in localStorage.
+- `assets/app.js`: language, theme and text-size preferences, saved only in localStorage.
 - `assets/*-preview.png`: screenshots of the linked live projects.
 
 To add a project, copy a project article and update its name, descriptions in both languages, destination and preview. Do not invent projects or publish private details.
@@ -64,3 +64,7 @@ The honeypot is hidden from keyboards and screen readers. It complements the
 provider's spam filtering; it does not guarantee that all bots are stopped.
 
 See docs/accessibility.md for verification scope and remaining manual checks.
+
+The floating text-size panel shares the services site’s normal, 125% and 150% sizes,
+one-second introduction and two-second manual-close delay. It pauses while keyboard
+focus is inside and supports Escape. Its preference is saved as jl-hub-taille.

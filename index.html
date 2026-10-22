@@ -8,16 +8,18 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f1ebdf">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/style.css?v=20261022j">
+<link rel="stylesheet" href="assets/style.css?v=20261022k">
 <script>
 try {
+  var size = localStorage.getItem('jl-hub-taille');
+  if (size === 'grande' || size === 'tres-grande') document.documentElement.dataset.taille = size;
   var theme = localStorage.getItem('jl-hub-theme');
   if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
 } catch (e) {}
 </script>
-<script src="assets/app.js?v=20261022j" defer></script>
-<script src="assets/accessibility.js?v=20261022j" defer></script>
-<script src="assets/contact.js?v=20261022j" defer></script>
+<script src="assets/app.js?v=20261022k" defer></script>
+<script src="assets/accessibility.js?v=20261022k" defer></script>
+<script src="assets/contact.js?v=20261022k" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main" data-en="Skip to content">Aller au contenu</a>
@@ -36,6 +38,19 @@ try {
     </button>
   </nav>
 </header>
+<aside class="preferences" aria-label="Taille du texte" data-en-label="Text size">
+  <button type="button" class="preferences-toggle" aria-controls="display-controls" aria-expanded="true">
+    <span aria-hidden="true">Aa</span><span class="visually-hidden" data-en="Text size">Taille du texte</span>
+    <span class="preferences-arrow" aria-hidden="true">›</span>
+  </button>
+    <div class="tools" id="display-controls">
+      <p class="preference-label" data-en="Text size">Taille du texte</p><div class="switch" role="group" aria-label="Taille du texte" data-en-label="Text size">
+        <button type="button" data-taille-choice="normale" aria-pressed="true" aria-label="Taille du texte : normale" data-en-label="Text size: normal">A</button>
+        <button type="button" data-taille-choice="grande" aria-pressed="false" aria-label="Taille du texte : grande" data-en-label="Text size: large">A+</button>
+        <button type="button" data-taille-choice="tres-grande" aria-pressed="false" aria-label="Taille du texte : très grande" data-en-label="Text size: extra large">A++</button>
+      </div>
+    </div>
+</aside>
 <main id="main" class="wrap" tabindex="-1">
   <section class="intro" aria-labelledby="intro-title">
     <div class="intro-heading">

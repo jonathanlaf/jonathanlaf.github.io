@@ -46,6 +46,74 @@
   languageButton.addEventListener('click', function () { var next = root.lang === 'fr' ? 'en' : 'fr'; save('jl-hub-lang', next); language(next); });
   themeButton.addEventListener('click', function () { var next = isDark() ? 'light' : 'dark'; root.dataset.theme = next; save('jl-hub-theme', next); updateThemeButton(); });
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeButton);
+  var sizeButtons = document.querySelectorAll('[data-taille-choice]');
+  function setTextSize(choice) {
+    if (['normale', 'grande', 'tres-grande'].indexOf(choice) < 0) choice = 'normale';
+    if (choice === 'normale') root.removeAttribute('data-taille');
+    else root.dataset.taille = choice;
+    sizeButtons.forEach(function(button) { button.setAttribute('aria-pressed', String(button.dataset.tailleChoice === choice)); });
+  }
+  setTextSize(read('jl-hub-taille'));
+  sizeButtons.forEach(function(button) { button.addEventListener('click', function() {
+    save('jl-hub-taille', button.dataset.tailleChoice); setTextSize(button.dataset.tailleChoice);
+  }); });
+  // Leave the edge tab reachable; pause closing while the panel is in use.
+  var preferences = document.querySelector('.preferences');
+  var preferencesToggle = document.querySelector('.preferences-toggle');
+  var displayControls = document.getElementById('display-controls');
+  var preferencesTimer;
+  var manuallyOpened = false;
+  var preferencesHovered = false;
+  function cancelPreferencesClose() {
+    clearTimeout(preferencesTimer);
+    preferences.classList.remove('is-intro');
+  }
+  function setPreferences(open) {
+    if (!open) clearTimeout(preferencesTimer);
+    preferences.classList.toggle('is-collapsed', !open);
+    preferencesToggle.setAttribute('aria-expanded', String(open));
+    displayControls.inert = !open;
+    displayControls.setAttribute('aria-hidden', String(!open));
+  }
+  function schedulePreferencesClose() {
+    clearTimeout(preferencesTimer);
+    if (preferencesToggle.getAttribute('aria-expanded') !== 'true') return;
+    preferencesTimer = setTimeout(function () {
+      // Keyboard users can finish choosing without the panel disappearing.
+      if (preferences.querySelector(':focus-visible')) return;
+      preferences.classList.toggle('is-intro', !manuallyOpened);
+      setPreferences(false);
+    }, manuallyOpened ? 2000 : 1000);
+  }
+  setPreferences(true);
+  schedulePreferencesClose();
+  preferences.addEventListener('pointerenter', function () {
+    preferencesHovered = true;
+    cancelPreferencesClose();
+  });
+  preferences.addEventListener('pointerleave', function () {
+    preferencesHovered = false;
+    schedulePreferencesClose();
+  });
+  preferences.addEventListener('pointerdown', cancelPreferencesClose);
+  preferences.addEventListener('focusin', cancelPreferencesClose);
+  preferences.addEventListener('focusout', function (event) {
+    if (!preferencesHovered && !preferences.contains(event.relatedTarget)) schedulePreferencesClose();
+  });
+  preferencesToggle.addEventListener('click', function () {
+    cancelPreferencesClose();
+    var open = preferencesToggle.getAttribute('aria-expanded') !== 'true';
+    manuallyOpened = open;
+    setPreferences(open);
+  });
+  preferences.addEventListener('keydown', function (event) {
+    cancelPreferencesClose();
+    if (event.key === 'Escape') {
+      preferencesToggle.focus();
+      setPreferences(false);
+    }
+  });
+
   document.getElementById('year').textContent = new Date().getFullYear();
   function renderContributions(data) {
     var grid = document.querySelector('.contribution-grid');
