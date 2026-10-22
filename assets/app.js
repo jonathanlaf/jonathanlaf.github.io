@@ -43,7 +43,14 @@
     themeButton.setAttribute('aria-label', root.lang === 'en' ? (dark ? 'Use light theme' : 'Use dark theme') : (dark ? 'Activer le thème clair' : 'Activer le thème sombre'));
     document.querySelector('meta[name="theme-color"]').content = dark ? '#202322' : '#f1ebdf';
   }
-  languageButton.addEventListener('click', function () { var next = root.lang === 'fr' ? 'en' : 'fr'; save('jl-hub-lang', next); language(next); });
+  languageButton.addEventListener('click', function () {
+    var next = root.lang === 'fr' ? 'en' : 'fr';
+    save('jl-hub-lang', next);
+    var englishPath = location.pathname === '/en/' || location.pathname === '/en';
+    if (next === 'en' && !englishPath) { location.assign('/en/' + location.hash); return; }
+    if (next === 'fr' && englishPath) { location.assign('/' + location.hash); return; }
+    language(next);
+  });
   themeButton.addEventListener('click', function () { var next = isDark() ? 'light' : 'dark'; root.dataset.theme = next; save('jl-hub-theme', next); updateThemeButton(); });
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeButton);
   var sizeButtons = document.querySelectorAll('[data-taille-choice]');
@@ -165,7 +172,7 @@
     cells[next].focus({preventScroll:true});
     cells[next].scrollIntoView({block:'nearest',inline:'nearest'});
   });
-  fetch('assets/contributions.json', { cache: 'no-cache' }).then(function (response) {
+  fetch('/assets/contributions.json', { cache: 'no-cache' }).then(function (response) {
     if (!response.ok) throw new Error('Calendar unavailable');
     return response.json();
   }).then(function (data) {
@@ -216,12 +223,17 @@
       slot.append(heading, values);
     });
   }
-  fetch('assets/repositories.json', {cache:'no-cache'}).then(function (response) {
+  fetch('/assets/repositories.json', {cache:'no-cache'}).then(function (response) {
     if (!response.ok) throw new Error('Repository activity unavailable');
     return response.json();
   }).then(function(data) { repositoryData = data; renderRepositories(data); }).catch(function() {
     document.querySelectorAll('.project-stats').forEach(function(slot) { slot.hidden = true; });
   });
 
-  language(read('jl-hub-lang') === 'en' ? 'en' : 'fr');
+  var englishPath = location.pathname === '/en/' || location.pathname === '/en';
+  if (!englishPath && read('jl-hub-lang') === 'en') {
+    location.replace('/en/' + location.hash);
+    return;
+  }
+  language(englishPath ? 'en' : 'fr');
 })();
