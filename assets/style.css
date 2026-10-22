@@ -228,3 +228,14 @@ a,button,input,select,textarea,summary,[tabindex] { scroll-margin-block:8rem; }
 .repo-stat + .repo-stat { margin-top:.6rem; }
 .repo-stat strong { display:block;font-size:.7rem;font-weight:500;margin-bottom:.1rem; }
 .stat-metrics { display:flex;flex-wrap:wrap;justify-content:flex-end;gap:0 .45rem;font-variant-numeric:tabular-nums; }
+
+/* A static contribution-inspired texture, entirely decorative. */
+body { position:relative;isolation:isolate; }
+body::before {
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background-image:url("green-grid.svg");background-repeat:repeat;background-size:360px 360px;
+ opacity:.14;
+ -webkit-mask-image:radial-gradient(ellipse 75% 65% at 100% 0%,#000 0%,transparent 78%),radial-gradient(ellipse 60% 65% at 0% 100%,#000 0%,transparent 80%);
+ mask-image:radial-gradient(ellipse 75% 65% at 100% 0%,#000 0%,transparent 78%),radial-gradient(ellipse 60% 65% at 0% 100%,#000 0%,transparent 80%);
+}
+@media(forced-colors:active),print { body::before { display:none; } }
