@@ -109,6 +109,11 @@
     var count = new Intl.NumberFormat(english ? 'en-CA' : 'fr-CA');
     document.querySelectorAll('[data-repositories]').forEach(function (slot) {
       slot.replaceChildren();
+      var heading = document.createElement('span');
+      heading.className = 'stats-label';
+      heading.textContent = english ? 'Stats:' : 'Stats :';
+      var values = document.createElement('div');
+      values.className = 'stats-values';
       slot.dataset.repositories.split(' ').forEach(function (name) {
         var repo = data.repositories[name];
         if (!repo) return;
@@ -119,40 +124,24 @@
           label.textContent = name === 'cad-mouse-mk2' ? 'Firmware' : (english ? 'Companion app' : 'Application compagnon');
           row.appendChild(label);
         }
+        var metrics = document.createElement('span');
+        metrics.className = 'stat-metrics';
         var commits = document.createElement('span');
-        var recent = count.format(repo.commits30days);
-        var total = count.format(repo.commitsAllTime);
-        var commitLabel = english ? 'Commits: ' + recent + ' in 30 days; ' + total + ' all time, on the default branch.'
-          : 'Commits : ' + recent + ' sur 30 jours ; ' + total + ' au total, sur la branche principale.';
-        var commitDescription = document.createElement('span');
-        commitDescription.className = 'visually-hidden';
-        commitDescription.textContent = commitLabel;
-        var icon = document.createElement('span');
-        icon.setAttribute('aria-hidden', 'true');
-        icon.textContent = '🔀 ';
-        var value = document.createElement('span');
-        value.setAttribute('aria-hidden', 'true');
-        value.textContent = recent + (english ? ' (30d) / ' : ' (30 j) / ') + total + (english ? ' (all time)' : ' (total)');
-        commits.append(commitDescription, icon, value);
-        row.appendChild(commits);
-        if (repo.releases > 0) {
+        commits.textContent = (english ? 'Commits: ' : 'Commits : ') + count.format(repo.commitsAllTime);
+        metrics.appendChild(commits);
+        if (repo.downloads > 0) {
           var separator = document.createElement('span');
-          separator.textContent = '|';
+          separator.textContent = '/';
           separator.setAttribute('aria-hidden', 'true');
           var downloads = document.createElement('span');
-          var downloadDescription = document.createElement('span');
-          downloadDescription.className = 'visually-hidden';
-          downloadDescription.textContent = count.format(repo.downloads) + (english ? ' release asset downloads, all time.' : ' téléchargements des fichiers de versions, au total.');
-          var downloadValue = document.createElement('span');
-          downloadValue.setAttribute('aria-hidden', 'true');
-          downloadValue.textContent = '📥 ' + count.format(repo.downloads);
-          downloads.append(downloadDescription, downloadValue);
-          row.append(separator, downloads);
+          downloads.textContent = (english ? 'Downloads: ' : 'Téléchargements : ') + count.format(repo.downloads);
+          metrics.append(separator, downloads);
         }
-        slot.appendChild(row);
+        row.appendChild(metrics);
+        values.appendChild(row);
       });
+      slot.append(heading, values);
     });
-
   }
   fetch('assets/repositories.json', {cache:'no-cache'}).then(function (response) {
     if (!response.ok) throw new Error('Repository activity unavailable');
