@@ -220,7 +220,8 @@ a,button,input,select,textarea,summary,[tabindex] { scroll-margin-block:8rem; }
 .project-body { display:flex;flex-direction:column;flex:1; }
 .project-card { display:flex;flex-direction:column; }
 .project-stats { display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:1rem;margin-top:auto;padding-top:.85rem;border-top:1px solid var(--line);background:none;font-size:.75rem;color:var(--muted); }
-.project-body > .project-stats { margin-top:1rem; }
+.project-body > .project-stats { margin-top:auto; }
+.project-visit:has(+ .project-stats) { margin-bottom:1rem; }
 .stats-label { font-weight:600; }
 .stats-values { min-width:0;text-align:right; }
 .project-body .repo-stat { margin:0;font-size:inherit;color:inherit; }
