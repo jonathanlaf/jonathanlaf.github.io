@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-20T17:02:10+00:00",
-  "since": "2026-10-21T17:02:10+00:00",
+  "updated": "2026-11-21T16:15:07+00:00",
+  "since": "2026-10-22T16:15:07+00:00",
   "repositories": {
     "keyaura": {
       "commits30days": 0,
@@ -24,14 +24,14 @@
       "branch": "main"
     },
     "services": {
-      "commits30days": 5,
+      "commits30days": 0,
       "commitsAllTime": 18,
       "downloads": 0,
       "releases": 0,
       "branch": "main"
     },
     "kohai": {
-      "commits30days": 2,
+      "commits30days": 0,
       "commitsAllTime": 48,
       "downloads": 0,
       "releases": 0,
